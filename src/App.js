@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
+import Home from "./Components/Home/Home";
+import { HelmetProvider } from "react-helmet-async";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import ProductDetail from "./Components/Product/ProductDetail";
+import './App.css'
+import ProductSearch from "./Components/Product/ProductSearch";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <HelmetProvider>
+          <Header />
+          <div className="container container-fluid">
+          <ToastContainer theme='dark'/>
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/search/:keyword" element={<ProductSearch/>} />
+            <Route path="/product/:id" element={<ProductDetail/>} />
+          </Routes>
+          </div>
+          <Footer />
+        </HelmetProvider>
+      </div>
+    </BrowserRouter>
   );
 }
 
